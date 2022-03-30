@@ -17,19 +17,31 @@ The **first thing** you should know is that, in the actual version, running all 
 
 ### **1. pureMesh**
 
+```bash
+python3 pureMesh.py
+```
 In the present moment, **the pureMesh doesn't take anything as input**. In the future, we expect that the Pipe-mesh upgrades to a global level of research. Uses the **geopy** to create a geojson, going inside the geojson, more specific in a key named **'boundingbox'**, you can find the coordinates of the region chosen (in our case Brazil) and starts checking if the scrapped items are in the parameters.  For **output** you should expect a **temporary JSON** file with contains **all the coordinates of the finals squares** created by the script, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-intermediary?region=us-west-2&tab=objects). It usually takes **4-5 hours** to finish this script.
 
 ### 2. meshAcolyte
 
+```bash
+python3 meshAcolyte.py
+```
 It receives as **input** the **JSON file made** by pureMesh, putting all the coordinates of the squares made earlier in a messages queue in SQS to be scrapped by the laracnaMeshNational after. For **output**, you receive **a queue in SQS with messages** named as **'mesh-laracna-inputs.fifo'** and inside each message, **contains the coordinates of an individual square in the JSON**. It usually takes a **few minutes** to complete this script.
 
 ### 3. laracnaMeshNational
 
+```bash
+python3 laracnaMeshNational.py
+```
 This scrapper takes as **input** each message from the **'mesh-laracna-inputs.fifo'** and extracts all properties **ID's and related coordinates** inside the squares formed by the geodata given in the input. This script **runs on multiple machines** at the same time which one picks **one message at a time**, executes the scrapper in the square, put the data achieved as a message in a new queue, and starts **again** with another square coordinate in a new message **until there are no more messages in queue**. For **output** you should expect a new queue in SQS named **'mesh-laracna-output.fifo'** which contains **every ID's and related coordinates** of all the squares in the previous input queue. The time to complete this script **depends** on how many machines are you working with.
 
 ### 4. listingsCompiler
 
-This last script receives as **input** the **'mesh-laracna-output.fifo'**, basically assembles all the messages in a **temporary JSON** and does the upload to the S3. For output, you receive a temporary JSON with organized ID's properties and related coordinates, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-listings?region=us-west-2&tab=objects). It usually takes a **few minutes** to complete this script.
+```bash
+python3 listingsCompiler.py
+```
+This last script receives as **input** the messages in **'mesh-laracna-output.fifo'**, basically assembles all the messages in a **temporary JSON** and does the upload to the S3. For output, you receive a temporary JSON with organized ID's properties and related coordinates, you can find the **JSON** [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-listings?region=us-west-2&tab=objects). It usually takes a **few minutes** to complete this script.
 ## Contributing
 For changes, please do a **pull request** with what you would like to change in the code, a supervisor will authorize the change if everything is in operation. 
 
