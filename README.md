@@ -17,7 +17,7 @@ The **first thing** you should know is that, in the actual version, running all 
 
 ### **1. pureMesh**
 
-In the present moment, **the pureMesh doesn't take anything as input**. In the future, we expect that the Pipe-mesh upgrades to a global level of research. Uses the **geopy** to create a geojson, going inside the geojson, more specific in a key named **'boundingbox'**, you can find the coordinates of the region chosen (in our case Brazil) and starts checking if the scrapped items are in the parameters.  For **output** you should expect a **JSON temporary** file with contains **all the coordinates of the finals squares** created by the script, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-intermediary?region=us-west-2&tab=objects). It usually takes **4-5 hours** to finish this script.
+In the present moment, **the pureMesh doesn't take anything as input**. In the future, we expect that the Pipe-mesh upgrades to a global level of research. Uses the **geopy** to create a geojson, inside the geojson, more specific in a key named **'boundingbox'**, you can find the coordinates of the region chosen (in our case Brazil) and starts checking if the scrapped items are in the parameters.  For **output** you should expect a **JSON temporary** file with contains **all the coordinates of the finals squares** created by the script, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-intermediary?region=us-west-2&tab=objects). It usually takes **4-5 hours** to finish this script.
 
 ### 2. meshAcolyte
 
