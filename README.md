@@ -17,7 +17,7 @@ The **first thing** you should know is that, in the actual version, running all 
 
 ### **1. pureMesh**
 
-In the present moment, **the pureMesh doesn't take anything as input**. In the future, we expect that the Pipe-mesh upgrades to a global level of research. Uses the **geopy** to create a geojson, inside the geojson, more specific in a key named **'boundingbox'**, you can find the coordinates of the region chosen (in our case Brazil) and starts checking if the scrapped items are in the parameters.  For **output** you should expect a **JSON temporary** file with contains **all the coordinates of the finals squares** created by the script, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-intermediary?region=us-west-2&tab=objects). It usually takes **4-5 hours** to finish this script.
+In the present moment, **the pureMesh doesn't take anything as input**. In the future, we expect that the Pipe-mesh upgrades to a global level of research. Uses the **geopy** to create a geojson, going inside the geojson, more specific in a key named **'boundingbox'**, you can find the coordinates of the region chosen (in our case Brazil) and starts checking if the scrapped items are in the parameters.  For **output** you should expect a **temporary JSON** file with contains **all the coordinates of the finals squares** created by the script, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-intermediary?region=us-west-2&tab=objects). It usually takes **4-5 hours** to finish this script.
 
 ### 2. meshAcolyte
 
@@ -29,3 +29,12 @@ This scrapper takes as **input** each message from the **'mesh-laracna-inputs.fi
 
 ### 4. listingsCompiler
 
+This last script receives as **input** the **'mesh-laracna-output.fifo'**, basically assembles all the messages in a **temporary JSON** and does the upload to the S3. For output, you receive a temporary JSON with organized ID's properties and related coordinates, you can find the JSON [here](https://s3.console.aws.amazon.com/s3/buckets/pipe-listings?region=us-west-2&tab=objects). It usually takes a **few minutes** to complete this script.
+## Contributing
+For changes, please do a **pull request** with what you would like to change in the code, a supervisor will authorize the change if everything is in operation. 
+
+Please make sure to update tests as appropriate.
+
+### Extra Information
+
+Access to the [Notion Page](https://www.notion.so/Mesh-283ae21379634af6bccb03359a61f268)
